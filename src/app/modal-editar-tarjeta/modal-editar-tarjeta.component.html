@@ -1,0 +1,16 @@
+<div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="card.nombresensor" name="title">
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <textarea class="form-control" [(ngModel)]="card.tipocultivo" name="content"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  </div>

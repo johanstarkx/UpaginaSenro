@@ -1,0 +1,10 @@
+<h1>Lista de Sensores</h1>
+<button (click)="generarCard()">Generar tarjeta</button>
+<div *ngFor="let c of card">
+    <app-card 
+    [card]="c" 
+    (borrarCard)="borrarCard($event)"
+    (editarCard)="editarCard($event)"
+    (verCard)="verCard($event)"
+    ></app-card>
+</div>

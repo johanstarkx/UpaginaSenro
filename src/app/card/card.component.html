@@ -1,0 +1,15 @@
+<div class="card">
+  <!-- Agrega aquí los elementos HTML para mostrar las variables -->
+  <p>ID: {{card.id}}</p>
+  <p>Nombre: {{ card.nombresensor }}</p>
+  <p>Cultivo: {{ card.tipocultivo }}</p>
+  <p>Valor: {{ card.valoractual }}</p>
+  <p>Minimo: {{ card.valorminimo }} Máximo: {{card.valormaximo}}</p>
+  <p>aqui {{card.content}}</p>
+
+  <!-- Agrega aquí los botones si es necesario -->
+  <button (click)="botonBorrar()">Borrar</button>
+  <button (click)="botonEditar()">Editar</button>
+  <button (click)="botonVer()">Ver</button>
+  
+</div>
