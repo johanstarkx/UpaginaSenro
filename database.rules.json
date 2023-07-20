@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": "auth != null",
+  ".write": "auth != null && (root.child('Usuarios').child(auth.uid).child('Tipo').val() == 'Administrador'  ) ",
+    "Usuarios": {
+      "$user_id": {
+        ".read": "auth != null",
+        ".write": "auth != null && (root.child('Usuarios').child(auth.uid).child('Tipo').val() == 'Administrador' || $user_id == auth.uid)"
+      }
+    },
+      "Sensores": {
+      ".read": "auth != null",
+      ".write": "true"
+    }
+      
+  }
+}
+//auth != null && root.child('Usuarios').child(auth.uid).child('Tipo').val() == 'Normal'
