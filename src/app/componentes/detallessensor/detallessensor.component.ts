@@ -61,4 +61,8 @@ export class DetallessensorComponent implements OnInit {
         .catch(err => console.log(err));
     }
   }
+
+  verHistorial() : void {
+    
+  }
 }
