@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
+import {Card} from './card';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {AngularFireDatabase} from '@angular/fire/compat/database'
 import { ModalEditarTarjetaComponent } from './modal-editar-tarjeta/modal-editar-tarjeta.component';
-import firebase from 'firebase/compat/app'; // Importa el módulo de Firebase
 import { of, Observable } from 'rxjs';
-
-/// esto es de firebase
-
-import { initializeApp } from "firebase/app";
+import {Card} from './card/card';
 
 @Component({
   selector: 'app-root',
@@ -15,30 +12,36 @@ import { initializeApp } from "firebase/app";
 })
 export class AppComponent {
   title: string = 'Lista de Sensores';
-  card: any[] = [];
-  ids: number = 0;
+  public card: any[];
 
-  constructor(private modalService: NgbModal) {
-    // Inicializa la configuración de Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyAZ5na9Q4ZqORfVR6eYvwmWx7VxdxCi0xo",
-      authDomain: "proyectoinvernaderoarica-ab35c.firebaseapp.com",
-      databaseURL: "https://proyectoinvernaderoarica-ab35c-default-rtdb.firebaseio.com",
-      projectId: "proyectoinvernaderoarica-ab35c",
-      storageBucket: "proyectoinvernaderoarica-ab35c.appspot.com",
-      messagingSenderId: "93700256865",
-      appId: "1:93700256865:web:b4f4c82b3a6839ae1ee620"
-    };
-    initializeApp(firebaseConfig); // Inicializa la aplicación de Firebase
+  constructor(private db: AngularFireDatabase) {
+    this.card = [];
+    this.getStarted()
   }
 
-  // Getter para devolver el observable de la lista de tarjetas
-  get cardObservable(): Observable<any[]> {
-    return of(this.card);
+  async getStarted(){
+    var cards: Card[];
+    await this.getCardsFromRealtimeDB().then(value => {
+      cards = value as Card[];
+      this.card = cards;
+      console.log(this.card)
+    });
+    
   }
+
+  getCardsFromRealtimeDB(){
+    return new Promise((resolve,reject) => {
+      this.db.list('Sensores').valueChanges().subscribe(value =>{
+        resolve(value)
+      })
+    })
+  }
+
+  
 
   generarCard() {
-    const newCard = {
+    /**
+     * const newCard = {
       id: this.ids + 1,
       title: "a",
       content: "456456",
@@ -50,20 +53,22 @@ export class AppComponent {
     };
     this.ids += 1;
     this.card.push(newCard);
+     */
   }
 
   borrarCard(cx: any) {
-    // Encuentra el índice del elemento con el ID proporcionado en el arreglo card
+    /* // Encuentra el índice del elemento con el ID proporcionado en el arreglo card
     const index = this.card.findIndex(c => c.id === cx.id);
 
     if (index !== -1) {
       // Si se encontró el elemento, elimínalo utilizando splice
       this.card.splice(index, 1);
     }
-    console.log('Borrar card con ID:', cx.id);
+    console.log('Borrar card con ID:', cx.id);*/
   }
 
   editarCard(cx: any) {
+    /*
     // Encontrar la tarjeta en el arreglo y actualizar sus valores
     const index = this.card.findIndex(c => c.id === cx.id);
     if (index !== -1) {
@@ -80,7 +85,7 @@ export class AppComponent {
       }).catch(() => {
         // Modal cerrado sin guardar cambios (opcional: manejar aquí)
       });
-    }
+    } */
   }
 
   verCard(cx: any) {
@@ -107,3 +112,4 @@ export class AppComponent {
   }
 
 }
+

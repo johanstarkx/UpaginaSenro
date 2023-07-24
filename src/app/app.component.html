@@ -1,8 +1,6 @@
 <h1>Lista de Sensores</h1>
-<h1>Lista de Sensores</h1>
-<button (click)="generarCard()">Generar tarjeta</button>
-<div *ngIf="(cardObservable | async) as cardList">
-  <app-card *ngFor="let c of cardList"
+<div>
+  <app-card *ngFor="let c of card"
     [card]="c" 
     (borrarCard)="borrarCard($event)"
     (editarCard)="editarCard($event)"
