@@ -1,0 +1,60 @@
+<div *ngIf="currentSensor" class="edit-form">
+  <h4>DETALLES</h4>
+  <form>
+    <div class="form-group">
+      <label for="Nombre">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Nombre"
+        [(ngModel)]="currentSensor.Nombre"
+        name="Nombre"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Cultivo">Cultivo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Cultivo"
+        [(ngModel)]="currentSensor.Cultivo"
+        name="Cultivo"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Cultivo">Valor mínimo requerido</label>
+      <input
+        type="text"
+        class="form-control"
+        id="MinRequerido"
+        [(ngModel)]="currentSensor.MinRequerido"
+        name="MinRequerido"
+      />
+    </div>
+    <div class="form-group">
+      <label for="Cultivo">Valor máximo requerido</label>
+      <input
+        type="text"
+        class="form-control"
+        id="MaxRequerido"
+        [(ngModel)]="currentSensor.MaxRequerido"
+        name="MaxRequerido"
+      />
+    </div>
+  </form>
+
+
+  <button class="badge badge-danger mr-2" (click)="deleteSensor()">
+    Eliminar Sensor
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updateSensor()">
+    Actualizar Sensor
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentSensor">
+  <br />
+  <p>No se puede obtener los datos de este sensor...</p>
+</div>

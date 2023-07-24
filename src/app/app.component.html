@@ -1,10 +1,2 @@
-<h1>Lista de Sensores</h1>
-<div>
-  <app-card *ngFor="let c of card"
-    [card]="c" 
-    (borrarCard)="borrarCard($event)"
-    (editarCard)="editarCard($event)"
-    (verCard)="verCard($event)"
-  ></app-card>
-</div>
-
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,32 @@
+<div class="list row">
+    <div class="col-md-6">
+      <h4>Lista de Sensores</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let sensor of sensores; let i = index"
+          [class.active]="i == indiceactual"
+          (click)="cambiarSensorActivo(sensor, i)"
+        >
+          {{ sensor.Nombre }} - {{sensor.Cultivo}} (Actual:{{sensor.ValorActual}}, Rango Optimo: {{sensor.MinRequerido}}-{{sensor.MaxRequerido}})
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="eliminarSensores()">
+        Eliminar TODOS los sensores
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="sensorActual">
+        <app-detallessensor
+          (refreshList)="actualizar()"
+          [sensor]="sensorActual"
+        ></app-detallessensor>
+      </div>
+  
+      <div *ngIf="!sensorActual">
+        <br />
+        <p>Haga click en un sensor para modificar sus parámetros</p>
+      </div>
+    </div>
+  </div>
