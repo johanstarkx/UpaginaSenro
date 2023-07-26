@@ -1,34 +1,38 @@
-import { Component, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Sensor } from 'src/app/clases/Sensor.model';
+import { SensorService } from 'src/app/clases/Sensor.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-historialsensor',
-  standalone:true,
-  template:`
-  <div class="modal-header">
-    <h4 class="modal-title">Hi there!</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <p>Hello, {{ name }}!</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-  </div>
-`,
+  standalone: true,
+  templateUrl: './historialsensor.component.html',
+  imports:[CommonModule]
 })
-export class NgbdModalContent {
-	@Input() name: any;
+export class HistorialsensorComponent implements OnInit {
+  id: string = "";
+  sensor?: Sensor;
 
-	constructor(public activeModal: NgbActiveModal) {}
-}
+  constructor(
+    private route: ActivatedRoute,
+    private sensorService: SensorService
+  ) {}
 
-@Component({ selector: 'app-historialsensor', standalone: true, templateUrl: './historialsensor.component.html' })
-export class HistorialsensorComponent {
-  constructor(private modalService: NgbModal) {}
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
 
-	open() {
-		const modalRef = this.modalService.open(NgbdModalContent);
-		modalRef.componentInstance.name = 'World';
-	}
+      // Obtener el sensor específico desde el servicio usando el ID
+      this.sensorService.get(this.id).valueChanges().subscribe((sensor: Sensor | null) => {
+        if (sensor) {
+          this.sensor = sensor;
+          console.log('Sensor completo:', this.sensor);
+        } else {
+          // Manejo de error: no se encontró el sensor con el ID proporcionado
+          console.log('No se encontró el sensor con el ID proporcionado.');
+        }
+      });
+    });
+  }
 }

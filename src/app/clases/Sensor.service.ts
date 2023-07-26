@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { Sensor } from './Sensor.model';
 
 @Injectable({
@@ -32,5 +32,8 @@ export class SensorService {
 
   deleteAll(): Promise<void> {
     return this.sensorsRef.remove();
+  }
+  get(id: string): AngularFireObject<Sensor> {
+    return this.db.object(`${this.dbPath}/${id}`);
   }
 }

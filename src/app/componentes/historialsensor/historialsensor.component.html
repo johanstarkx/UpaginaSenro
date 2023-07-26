@@ -1,1 +1,12 @@
-<p>historialsensor works!</p>
+<!-- historialsensor.component.html -->
+<div *ngIf="sensor">
+    <h2>Historial del sensor</h2>
+    <div *ngIf="sensor.Historial">
+      <div *ngFor="let registro of sensor.Historial">
+        <p>Fecha: {{ registro?.Fecha }}</p>
+        <p>Hora: {{ registro?.Hora }}</p>
+        <p>Valor: {{ registro?.Valor }}</p>
+        <hr>
+      </div>
+    </div>
+  </div>

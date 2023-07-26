@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angu
 import { Sensor } from 'src/app/clases/Sensor.model';
 import { SensorService } from 'src/app/clases/Sensor.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { Router } from '@angular/router';
 @Component({
 	selector: 'ngbd-modal-content',
 	standalone: true,
@@ -43,7 +43,7 @@ export class DetallessensorComponent implements OnInit {
   };
   message = '';
 
-  constructor(private sensorService: SensorService,private modalService: NgbModal) { }
+  constructor(private sensorService: SensorService,private modalService: NgbModal,private router: Router) { }
 
   ngOnInit(): void {
     this.message = '';
@@ -88,7 +88,6 @@ export class DetallessensorComponent implements OnInit {
   }
 
   verHistorial() : void {
-    const modalRef = this.modalService.open(NgbdModalContent);
-		modalRef.componentInstance.name = 'World';
+    this.router.navigate(['/historial/'+this.sensor?.ID]);
   }
 }
