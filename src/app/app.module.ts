@@ -14,7 +14,6 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { IniciarsesionComponent } from './componentes/iniciarsesion/iniciarsesion.component';
 import { Listasensores2Component } from './componentes/listasensores2/listasensores2.component';
 import { DetallessensorComponent } from './componentes/detallessensor/detallessensor.component';
-import { HistorialsensorComponent } from './componentes/historialsensor/historialsensor.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZ5na9Q4ZqORfVR6eYvwmWx7VxdxCi0xo",
@@ -35,7 +34,6 @@ const firebaseConfig = {
     IniciarsesionComponent,
     Listasensores2Component,
     DetallessensorComponent,
-    HistorialsensorComponent
   ],
   imports: [
     BrowserModule,
